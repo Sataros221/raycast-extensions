@@ -28,8 +28,9 @@ export default function FileListItem({ file, email }: FileListItemProps) {
       })()
     : null;
 
-  const iconUrl = getFileIconLink(file.mimeType, 256);
-  const markdown = `<img src="${iconUrl}" alt="${file.name}" width="185" />`;
+  // Use thumbnail if available, otherwise use icon
+  const imageUrl = file.thumbnailLink || getFileIconLink(file.mimeType, 256);
+  const markdown = `<img src="${imageUrl}" alt="${file.name}" width="185" />`;
 
   const detail = (
     <List.Item.Detail
@@ -119,7 +120,7 @@ export default function FileListItem({ file, email }: FileListItemProps) {
               {file.shared && (
                 <List.Item.Detail.Metadata.TagList title="Sharing">
                   <List.Item.Detail.Metadata.TagList.Item text="Shared" color={Color.Blue} />
-                  {file.viewersCanCopyContent === false && (
+                  {file.copyRequiresWriterPermission === true && (
                     <List.Item.Detail.Metadata.TagList.Item text="Copy Protected" color={Color.Orange} />
                   )}
                 </List.Item.Detail.Metadata.TagList>
