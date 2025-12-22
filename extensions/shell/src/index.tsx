@@ -100,13 +100,13 @@ const WINDOWS_RUNNERS = {
     runner: runInPowerShell7Console,
     label: "PowerShell 7",
   },
-  commandprompt: {
+  commandPrompt: {
     runner: runInCommandPrompt,
     label: "Command Prompt",
   },
 } as const;
 
-const WINDOWS_ACTION_ORDER: Array<keyof typeof WINDOWS_RUNNERS> = ["powershell7", "powershell", "commandprompt"];
+const WINDOWS_ACTION_ORDER: Array<keyof typeof WINDOWS_RUNNERS> = ["powershell7", "powershell", "commandPrompt"];
 
 const getWindowsRunner = (type: string) =>
   WINDOWS_RUNNERS[type as keyof typeof WINDOWS_RUNNERS]?.runner ?? WINDOWS_RUNNERS.powershell.runner;
